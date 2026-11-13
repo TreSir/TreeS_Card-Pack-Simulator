@@ -1,0 +1,22 @@
+{
+  "source_url": "https://holo.yashb.xyz/",
+  "captured_at": "2026-11-13T16:00:13.640Z",
+  "response_bytes": 294983,
+  "sha256": "32953f699d287f637ea133494448ad09e0911fdec1bcf0c1e055d0ee8b482081",
+  "characters": [
+    "blip",
+    "cubit",
+    "facet",
+    "ringo",
+    "nova",
+    "sparkle"
+  ],
+  "extracted_images": 31,
+  "image_bytes": 161318,
+  "transformations": [
+    "Preserve original response in reference/original.html",
+    "Extract inline CSS and application JavaScript without changing their contents",
+    "Decode embedded character artwork into byte-identical local images",
+    "Remove the Cloudflare analytics beacon from the runnable copy"
+  ]
+}

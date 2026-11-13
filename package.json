@@ -1,0 +1,14 @@
+{
+  "name": "holo-reverse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Recovered, dependency-free frontend of https://holo.yashb.xyz/",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "recover": "node scripts/recover.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
