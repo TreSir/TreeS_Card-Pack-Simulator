@@ -15,27 +15,33 @@
     <div class="pack" id="pack">
       <div class="skin front" aria-hidden="true">
         <span class="tag">Tear here ⟶</span><span class="lips"><i class="lip"></i></span>
-        <b class="mark">holo</b><span class="series">Series 01</span>
+        <b class="mark">ARCANA</b><span class="series">Midnight</span>
         <div class="orb">
+          <div class="classic-mascot"></div>
+          <div class="tarot-seal">
+            <i class="seal-ring"></i><i class="seal-ring inner"></i>
+            <span class="seal-moon">☾</span><span class="seal-star one">✦</span><span class="seal-star two">✧</span><span class="seal-star three">✧</span>
+          </div>
         </div>
-        <span class="foot l">Card pack</span><span class="foot r">5 cards</span>
+        <span class="foot l" id="pack-family">Major Arcana</span><span class="foot r">5 cards</span>
       </div>
       <div class="skin back" aria-hidden="true">
-        <i class="fin"></i><b class="mark sm">holo</b>
-        <p class="blurb">5 collectible cards<br>One holo in every pack</p>
+        <i class="fin"></i><b class="mark sm">ARCANA</b>
+        <p class="blurb">Five illustrated cards<br>Discover your story</p>
         <i class="code"></i>
       </div>
       <div class="flap" id="flap" aria-hidden="true"></div>
-      <button class="hit" id="hit" type="button" aria-label="Card pack, 5 cards. Drag across the top to tear it open, or press to open."></button>
+      <button class="hit" id="hit" type="button" aria-label="Tarot card pack, 5 cards. Drag across the top to tear it open, or press to open."></button>
     </div>
   </div>
   <canvas class="fx" id="fx" aria-hidden="true"></canvas>
 </main>
+<div class="card-description" id="card-description" lang="zh-CN" hidden><strong></strong><span></span></div>
 <button class="again" id="again" type="button" hidden>Open another pack</button>
 <button class="mute" id="mute" type="button" aria-label="Mute sound" aria-pressed="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9.5v5h3.5l4.5 4v-13l-4.5 4z" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><g class="on"><path d="M15.5 9.2a4 4 0 0 1 0 5.6"/><path d="M18.2 6.8a7.5 7.5 0 0 1 0 10.4"/></g><g class="off"><path d="m15.5 9.5 5 5m0-5-5 5"/></g></g></svg></button>
 <p class="sr" id="live" aria-live="polite"></p>
 
-<script defer src="src/art.js"></script>
-<script defer src="src/app.js"></script>
+<script defer src="src/draw.js"></script>
+<script defer src="src/loader.js"></script>
 </body>
 </html>

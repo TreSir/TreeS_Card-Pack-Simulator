@@ -1,0 +1,309 @@
+{
+  "types": [
+    {
+      "id": "tarot",
+      "name": "Tarot",
+      "visualPack": "tarot"
+    },
+    {
+      "id": "classic",
+      "name": "Classic characters",
+      "visualPack": "classic"
+    }
+  ],
+  "packs": [
+    {
+      "id": "tarot",
+      "name": "Tarot pack",
+      "brand": "ARCANA",
+      "family": "Major Arcana",
+      "types": [
+        "tarot"
+      ],
+      "size": 5,
+      "visuals": {
+        "wrapper": "tarot",
+        "colorways": [
+          [
+            "Midnight",
+            "#26344d"
+          ],
+          [
+            "Garnet",
+            "#643d43"
+          ],
+          [
+            "Forest",
+            "#3a5147"
+          ],
+          [
+            "Amethyst",
+            "#51435d"
+          ],
+          [
+            "Ochre",
+            "#8a6744"
+          ],
+          [
+            "Slate",
+            "#40525b"
+          ]
+        ],
+        "rainbow": {
+          "enabled": true,
+          "colors": [
+            "#d5a35b",
+            "#b96e61",
+            "#e4c783",
+            "#8aa495",
+            "#829cb4",
+            "#a998ae",
+            "#d2ad83"
+          ]
+        },
+        "confetti": {
+          "enabled": true,
+          "colors": [
+            "#d5a35b",
+            "#b96e61",
+            "#e4c783",
+            "#8aa495",
+            "#829cb4",
+            "#a998ae",
+            "#d2ad83",
+            "#ffffff"
+          ],
+          "desktopCount": 240,
+          "mobileCount": 130
+        },
+        "reflection": {
+          "edge": 1,
+          "seal": 1
+        }
+      }
+    },
+    {
+      "id": "classic",
+      "name": "Classic pack",
+      "brand": "holo",
+      "family": "Card pack",
+      "types": [
+        "classic"
+      ],
+      "size": 5,
+      "visuals": {
+        "wrapper": "classic",
+        "colorways": [
+          [
+            "Cobalt",
+            "#2b3ff0"
+          ],
+          [
+            "Ember",
+            "#f0542c"
+          ],
+          [
+            "Grape",
+            "#7a42f0"
+          ],
+          [
+            "Pine",
+            "#0e9c79"
+          ],
+          [
+            "Night",
+            "#23273d"
+          ],
+          [
+            "Bubblegum",
+            "#ec4f9a"
+          ]
+        ],
+        "rainbow": {
+          "enabled": true,
+          "colors": [
+            "#ff3d6e",
+            "#ff8a3d",
+            "#ffd34d",
+            "#4fd9a0",
+            "#4fb2ff",
+            "#8b6cff",
+            "#ff5cc8"
+          ]
+        },
+        "confetti": {
+          "enabled": true,
+          "colors": [
+            "#ff3d6e",
+            "#ff8a3d",
+            "#ffd34d",
+            "#4fd9a0",
+            "#4fb2ff",
+            "#8b6cff",
+            "#ff5cc8",
+            "#ffffff"
+          ],
+          "desktopCount": 240,
+          "mobileCount": 130
+        },
+        "reflection": {
+          "edge": 1,
+          "seal": 1
+        }
+      }
+    },
+    {
+      "id": "mixed",
+      "name": "Mixed pack",
+      "brand": "MIXED",
+      "family": "Tarot + Classic",
+      "types": [
+        "tarot",
+        "classic"
+      ],
+      "size": 5
+    }
+  ],
+  "cards": [
+    {
+      "id": "fool",
+      "type": "tarot",
+      "name": "The Fool",
+      "number": "0",
+      "image": "assets/tarot/the-fool.jpg",
+      "description": "带着好奇与勇气踏上旅途，象征新的开始与无限可能。"
+    },
+    {
+      "id": "magician",
+      "type": "tarot",
+      "name": "The Magician",
+      "number": "I",
+      "image": "assets/tarot/the-magician.jpg",
+      "description": "汇集手边的资源，将灵感化为行动与创造。"
+    },
+    {
+      "id": "high-priestess",
+      "type": "tarot",
+      "name": "The High Priestess",
+      "number": "II",
+      "image": "assets/tarot/the-high-priestess.jpg",
+      "description": "静观内心与未知，在宁静中倾听直觉。"
+    },
+    {
+      "id": "empress",
+      "type": "tarot",
+      "name": "The Empress",
+      "number": "III",
+      "image": "assets/tarot/the-empress.jpg",
+      "description": "丰盛与生长的象征，温柔地滋养创造力。"
+    },
+    {
+      "id": "lovers",
+      "type": "tarot",
+      "name": "The Lovers",
+      "number": "VI",
+      "image": "assets/tarot/the-lovers.jpg",
+      "description": "关于连接、信任，以及遵从内心的选择。"
+    },
+    {
+      "id": "wheel-of-fortune",
+      "type": "tarot",
+      "name": "The Wheel of Fortune",
+      "number": "X",
+      "image": "assets/tarot/the-wheel-of-fortune.jpg",
+      "description": "命运不断流转，提醒我们迎接变化与机遇。"
+    },
+    {
+      "id": "tower",
+      "type": "tarot",
+      "name": "The Tower",
+      "number": "XVI",
+      "image": "assets/tarot/the-tower.jpg",
+      "description": "闪电打破旧有结构，为真实与新生腾出空间。"
+    },
+    {
+      "id": "star",
+      "type": "tarot",
+      "name": "The Star",
+      "number": "XVII",
+      "image": "assets/tarot/the-star-preview.jpg",
+      "description": "夜空中的希望之光，象征平静、信念与疗愈。"
+    },
+    {
+      "id": "moon",
+      "type": "tarot",
+      "name": "The Moon",
+      "number": "XVIII",
+      "image": "assets/tarot/the-moon.jpg",
+      "description": "穿过朦胧与不确定，探索梦境和潜意识。"
+    },
+    {
+      "id": "sun",
+      "type": "tarot",
+      "name": "The Sun",
+      "number": "XIX",
+      "image": "assets/tarot/the-sun.jpg",
+      "description": "温暖的阳光带来喜悦、生命力与明朗。"
+    },
+    {
+      "id": "blip",
+      "type": "classic",
+      "name": "Blip",
+      "affinity": "Spark",
+      "number": "014",
+      "tier": "common",
+      "label": "Common",
+      "mark": "●",
+      "art": "blip",
+      "description": "一颗充满活力的小火花，带着轻快的笑容。"
+    },
+    {
+      "id": "cubit",
+      "type": "classic",
+      "name": "Cubit",
+      "affinity": "Block",
+      "number": "027",
+      "tier": "common",
+      "label": "Common",
+      "mark": "●",
+      "art": "cubit",
+      "description": "这是一个方块....."
+    },
+    {
+      "id": "facet",
+      "type": "classic",
+      "name": "Facet",
+      "affinity": "Prism",
+      "number": "063",
+      "tier": "rare",
+      "label": "Rare",
+      "mark": "◆",
+      "art": "facet",
+      "description": "闪耀的棱面折射出色彩与想象。"
+    },
+    {
+      "id": "ringo",
+      "type": "classic",
+      "name": "Ringo",
+      "affinity": "Orbit",
+      "number": "088",
+      "tier": "rare",
+      "label": "Holo rare",
+      "mark": "◆◆",
+      "art": "ringo",
+      "description": "带着环绕轨道的小小旅者，来自星空深处。"
+    },
+    {
+      "id": "nova",
+      "type": "classic",
+      "name": "Nova",
+      "affinity": "Star",
+      "number": "120",
+      "tier": "ultra",
+      "label": "Ultra rare",
+      "mark": "★",
+      "art": "nova",
+      "description": "明亮的星形伙伴，为每次相遇带来光芒。"
+    }
+  ]
+}

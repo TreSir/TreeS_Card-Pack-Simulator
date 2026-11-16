@@ -1,28 +1,31 @@
 
 const $ = s => document.querySelector(s);
 const scene = $('#scene'), pack = $('#pack'), flap = $('#flap'), hit = $('#hit'), ground = $('#ground'), again = $('#again'), live = $('#live');
+const cardDescription = $('#card-description'), descriptionTitle = cardDescription.querySelector('strong'), descriptionText = cardDescription.querySelector('span');
 const body = [...pack.querySelectorAll(':scope > .skin')], bodyLip = pack.querySelector('.lips .lip');
 const boxOf = ([l, t, w]) => `left:${l}%;top:${t}%;width:${w}%`;
 const rig = ({ body, eyes, mouth, joy }) => `<img class="body" src="${body}" alt="">${eyes.map(e => `<i class="eye" style="${boxOf(e)}"><img class="pupil" src="${e[3]}" alt=""></i>`).join('')}<img class="smile" style="${boxOf(mouth)}" src="${mouth[3]}" alt="">${joy ? `<img class="joy" style="${boxOf(joy)}" src="${joy[3]}" alt="">` : ''}`;
 const blink = (list, times = 1) => { for (const e of list) e.animate([{ scale: '1 1' }, { scale: '1 .08' }, { scale: '1 1' }], { duration: 170, iterations: times, easing: 'cubic-bezier(.77,0,.175,1)' }); };
-pack.querySelector('.orb').insertAdjacentHTML('afterbegin', `<img class="shade" src="${ART.sparkle.body}" alt="">` + rig(ART.sparkle) + ['ouch', 'drip'].map(k => { const a = ART.sparkle[k === 'drip' ? 'sweat' : k]; return `<img class="${k}" style="${boxOf(a)}" src="${a[3]}" alt="">`; }).join(''));
-// every picture is decoded up front and held on to, so a card has its art on the very first frame it exists
-const warm = Object.values(ART).flatMap(a => [a.body, ...a.eyes.map(e => e[3]), a.mouth[3], ...(a.joy ? [a.joy[3]] : [])]).map(src => { const i = new Image(); i.src = src; i.decode().catch(() => {}); return i; });
-const eyes = [...pack.querySelectorAll('.eye')], pupils = [...pack.querySelectorAll('.pupil')], edition = pack.querySelector('.series');
+const mascot = pack.querySelector('.classic-mascot');
+mascot.innerHTML = `<img class="shade" src="${ART.sparkle.body}" alt="">` + rig(ART.sparkle) + ['ouch', 'drip'].map(k => { const a = ART.sparkle[k === 'drip' ? 'sweat' : k]; return `<img class="${k}" style="${boxOf(a)}" src="${a[3]}" alt="">`; }).join('');
+const mascotEyes = [...mascot.querySelectorAll('.eye')], pupils = [...mascot.querySelectorAll('.pupil')];
+const edition = pack.querySelector('.series'), packFamily = $('#pack-family');
+let currentPack, currentVisualPack, currentDraw;
+// Keep each decoded image alive so the reveal does not show empty card faces.
+const warm = new Map();
+function warmPool(pool) {
+  const sources = pool.flatMap(card => {
+    if (card.image) return [card.image];
+    const a = ART[card.art];
+    return [a.body, ...a.eyes.map(e => e[3]), a.mouth[3], ...(a.joy ? [a.joy[3]] : [])];
+  });
+  for (const src of sources) if (!warm.has(src)) { const i = new Image(); i.src = src; i.decode().catch(() => {}); warm.set(src, i); }
+}
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const handheld = matchMedia('(pointer: coarse)').matches;   // phones and tablets: the same show with the costly invisible parts taken out
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v)), rand = (a, b) => a + Math.random() * (b - a);
 
-/* ---------- cards in the pack, front of the stack first ---------- */
-const DATA = [
-  { name: 'Blip', type: 'Spark', no: '014', tier: 'common', label: 'Common', mark: '●' },
-  { name: 'Cubit', type: 'Block', no: '027', tier: 'common', label: 'Common', mark: '●' },
-  { name: 'Facet', type: 'Prism', no: '063', tier: 'rare', label: 'Rare', mark: '◆' },
-  { name: 'Ringo', type: 'Orbit', no: '088', tier: 'rare', label: 'Holo rare', mark: '◆◆' },
-  { name: 'Nova', type: 'Star', no: '120', tier: 'ultra', label: 'Ultra rare', mark: '★' },
-];
 /* every pack is its own: colourway, the shapes of its light and shade, tear line and the order of the cards inside */
-const SKINS = [['Cobalt', '#2b3ff0'], ['Ember', '#f0542c'], ['Grape', '#7a42f0'], ['Pine', '#0e9c79'], ['Night', '#23273d'], ['Bubblegum', '#ec4f9a']];
 /* light and shade, drawn fresh for every pack in % of the pouch. the shine under the top seal is broken into streaks by the wrinkles
    where the foil gathers into the seal, each fading as it runs down; it reaches just past the tear line so the torn edge keeps a glint.
    the shade is a soft, crumpled shadow where the foil tucks into the bottom seal */
@@ -42,8 +45,9 @@ function light(st) {
   st.setProperty('--shine', svg(`<linearGradient id='g' x2='0' y2='1'><stop stop-color='%23fff' stop-opacity='.7'/><stop offset='1' stop-color='%23fff' stop-opacity='0'/></linearGradient><filter id='b'><feGaussianBlur stdDeviation='.28 .5'/></filter><g filter='url(%23b)'>${lit}</g>`));
   st.setProperty('--shade', svg(`<filter id='b'><feGaussianBlur stdDeviation='.35 .24'/></filter><path d='${dark}V93.2Z' fill-opacity='.1' filter='url(%23b)'/>`));
 }
-const shuffle = a => { for (let i = a.length; i > 1;) { const j = Math.random() * i-- | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const cardHTML = d => `<i class="slab"></i><i class="slab"></i><i class="slab"></i><div class="face"><div class="win"><i class="drop"></i></div><b class="name">${d.name}</b><span class="type">${d.type}</span><i class="rule"></i><span class="no">No. ${d.no}/120</span><span class="rar">${d.mark} ${d.label}</span><i class="holo"></i><i class="glare"></i><i class="glaze"></i></div><div class="pop">${rig(ART[d.name.toLowerCase()])}</div>`;
+const cardHTML = d => d.image
+  ? `<i class="slab"></i><i class="slab"></i><i class="slab"></i><div class="face"><img class="tarot-art" src="${d.image}" alt="" draggable="false"><i class="holo"></i><i class="glare"></i><i class="glaze"></i></div>`
+  : `<i class="slab"></i><i class="slab"></i><i class="slab"></i><div class="face"><div class="win"><i class="drop"></i></div><b class="name">${d.name}</b><span class="type">${d.affinity}</span><i class="rule"></i><span class="no">No. ${d.number}/120</span><span class="rar">${d.mark} ${d.label}</span><i class="holo"></i><i class="glare"></i><i class="glaze"></i></div><div class="pop">${rig(ART[d.art])}</div>`;
 
 /* ---------- springs, SwiftUI's (response, bounce) mapping ---------- */
 class Spring {
@@ -70,7 +74,17 @@ const measure = () => { PW = pack.offsetWidth; PH = pack.offsetHeight; const d =
 
 function enter() {
   state = 'enter';
-  const pool = SKINS.filter(s => s !== skin), st = pack.style;   // never the same colourway twice in a row
+  currentPack = CATALOG.packs[Math.floor(Math.random() * CATALOG.packs.length)];
+  const eligible = cardsForPack(CATALOG, currentPack);
+  currentDraw = drawCards(eligible, currentPack.size);
+  currentVisualPack = visualPackFor(CATALOG, currentPack, currentDraw);
+  pack.classList.toggle('theme-tarot', currentVisualPack.visuals.wrapper === 'tarot');
+  pack.dataset.packType = currentPack.id; pack.dataset.visualPack = currentVisualPack.id;
+  warmPool(eligible);
+  for (const mark of pack.querySelectorAll(':scope > .skin .mark')) mark.textContent = currentPack.brand;
+  packFamily.textContent = currentPack.family;
+  hit.setAttribute('aria-label', `${currentPack.name}, ${currentPack.size} cards. Drag across the top to tear it open, or press to open.`);
+  const choices = currentVisualPack.visuals.colorways.filter(s => s[1] !== skin?.[1]), pool = choices.length ? choices : currentVisualPack.visuals.colorways, st = pack.style;
   skin = pool[rand(0, pool.length) | 0]; edition.textContent = skin[0];
   st.setProperty('--pack', skin[1]); light(st);
   path();
@@ -203,7 +217,6 @@ function open() {
   state = 'open'; openedAt = t; drag = null;
   tear.p.x = tear.p.to = 1; clips(1);
   hit.disabled = true;   // the face keeps wincing as it falls away
-  live.textContent = `${skin[0]} pack opened: ${DATA.map(d => d.name).join(', ')}.`;   // the colourway never repeats, so a screen reader announces every pack
   P.rx.set(.3); P.ry.set(.3); P.rx.to = P.ry.to = 0;   // level out so the cards slide out square
   if (reduce) { pack.style.visibility = flow.style.visibility = 'hidden'; flap.className = 'flap'; }
   else {
@@ -212,6 +225,7 @@ function open() {
     burst();
   }
   spawn();
+  live.textContent = `${skin[0]} ${currentPack.name} opened: ${cards.map(c => c.d.name).join(', ')}.`;
   sfx?.rip(0); sfx?.pop(!reduce);
   if (reduce) for (const c of cards) sfx?.land(c.d.name.toLowerCase(), c.slot);
 }
@@ -263,17 +277,19 @@ function aimed() {
   return best;
 }
 function spawn() {
-  // a new stack order every pack. it fans out in that order, the front card sliding off to the right first and each one under it
-  // following, so the cards keep their stacking all the way out and never pass through each other
-  cards = shuffle([...DATA]).map((d, i) => {
+  // The contents were drawn when the pack appeared, so a mixed pack's visuals match its contents.
+  const drawn = currentDraw;
+  cards = drawn.map((d, i) => {
     const el = document.createElement('div');
-    el.className = `card ${d.tier} ${d.name.toLowerCase()}`; el.innerHTML = cardHTML(d);
-    el.setAttribute('role', 'img'); el.setAttribute('aria-label', `${d.name}, ${d.label}, number ${d.no}`);
-    el.style.zIndex = DATA.length - i;
+    el.className = d.image ? 'card tarot' : `card ${d.tier} ${d.art}`; el.innerHTML = cardHTML(d);
+    const typeName = CATALOG.types.find(type => type.id === d.type)?.name || 'Card';
+    el.setAttribute('role', 'img'); el.setAttribute('aria-label', `${d.image ? `${d.name}, ${typeName} ${d.number}` : `${d.name}, ${d.label}, number ${d.number}`}${d.description ? `. ${d.description}` : ''}`);
+    el.dataset.cardId = d.id; el.dataset.cardType = d.type;
+    el.style.zIndex = drawn.length - i;
     scene.append(el);
-    const c = { el, d, i, slot: DATA.length - 1 - i, face: el.querySelector('.face'), eyes: [...el.querySelectorAll('.eye')], blinkAt: t + rand(.6, 3.2), phase: 'in', hover: false, hx: .5, hy: .5,
+    const c = { el, d, i, slot: drawn.length - 1 - i, face: el.querySelector('.face'), eyes: [...el.querySelectorAll('.eye')], blinkAt: t + rand(.6, 3.2), phase: 'in', hover: false, hx: .5, hy: .5,
       p: pose({ x: P.x.x, y: P.y.x + PH * ((Math.max(...jag.map(q => q[1])) + .8 + 38.2) / 100 - .5), z: 3.5 - i * 1.75, rx: 0, ry: 0, rz: P.rz.x, s: .94 }, .55, .22) };
-    el.tabIndex = 0;   // the keyboard visits them too: picked, a card lifts and smiles just as it does under the pointer
+    el.tabIndex = 0;   // keyboard focus lifts and tilts the card just as the pointer does
     el.addEventListener('focus', () => c.kb = el.matches(':focus-visible'));
     el.addEventListener('blur', () => c.kb = false);
     return c;
@@ -283,7 +299,12 @@ function spawn() {
 }
 
 // the pieces are made while the pack is whole and only set off at the tear, so the tear itself has no work to do
-function load() { for (let i = 0; i < (handheld ? 130 : 240); i++) bits.push({ kind: i % 3, fill: [...BANDS, '#fff'][i % 8] }); }
+function load() {
+  const config = currentVisualPack.visuals.confetti;
+  if (!config.enabled) return;
+  const count = handheld ? config.mobileCount : config.desktopCount;
+  for (let i = 0; i < count; i++) bits.push({ kind: i % 3, fill: config.colors[i % config.colors.length] });
+}
 // they start down inside the pouch, between the cards and the front of the foil, and are blown up and out through the opening: straight up inside, spreading only once
 // they are free of the mouth. most are slow and floaty once out: vt is how fast that piece can fall through the air
 function burst() {
@@ -317,16 +338,12 @@ function frame(now) {
     P.rz.to = Math.sin(t * .9) * 1.6 * motion - (held && tear.p.x > 0 ? tear.dir * tear.p.x * 3 : 0);   // leans away from the pull only while it is being pulled
     if (state === 'idle' && !drag && tear.p.to < 1 && motion && t > nudgeAt) { P.rz.v += (Math.random() < .5 ? -1 : 1) * 70; if (tear.p.to) tear.th.v += 120; nudgeAt = t + rand(4, 7); }   // left alone it gives a little wiggle, and a half torn one flicks its strip at you
   }
-  if (t > blinkAt) {
-    blinkAt = t + rand(2.2, 5.5);
-    if (motion && !pack.classList.contains('held')) blink(eyes);
-  }
-  { // pupils follow the pointer
+  if (currentVisualPack.visuals.wrapper === 'classic') {
+    if (t > blinkAt) { blinkAt = t + rand(2.2, 5.5); if (motion && !held) blink(mascotEyes); }
     const dx = pointer.x - (innerWidth / 2 + P.x.x), dy = pointer.y - (innerHeight / 2 + P.y.x - PH * .02), dl = Math.hypot(dx, dy) || 1;
     const k = pointer.in ? Math.min(1, dl / 260) * PW * .014 : 0;
     eye.x.to = dx / dl * k; eye.y.to = dy / dl * k;
   }
-
   // springs, substepped so stiff ones stay stable on slow frames
   const springs = [...Object.values(P), ...Object.values(eye), tear.p, tear.th, tear.ph, squeeze, glow, ...ribbons.map(b => b.g), ...cards.flatMap(c => Object.values(c.p))];
   const n = Math.ceil(dt * 240), h = dt / n;
@@ -344,7 +361,7 @@ function frame(now) {
     flap.style.transform = `rotateZ(${(tear.th.x + draft) * tear.dir}deg) rotateX(${tear.ph.x + draft * 1.5}deg)`;
     if (p > .985 && tear.p.to >= 1) open();
   }
-  glow.to = (state === 'idle' && tear.p.x > 0) || ((state === 'open' || state === 'spread') && !reduce && !drained) ? 1 : 0;   // flows while it is torn, then goes up past the top of the screen, until the last of it has gone
+  glow.to = currentVisualPack.visuals.rainbow.enabled && ((state === 'idle' && tear.p.x > 0) || ((state === 'open' || state === 'spread') && !reduce && !drained)) ? 1 : 0;
   if (glow.x > .003 || glow.to) { rays.style.opacity = glow.x.toFixed(3); pour(dt); }
   if (fly) {
     fly.vy += 2600 * dt; fly.x += fly.vx * dt; fly.y += fly.vy * dt; fly.th += fly.vth * dt; fly.ph += fly.vph * dt;
@@ -358,11 +375,11 @@ function frame(now) {
     const fy = fall ? fall.y : 0;
     pack.style.transform = `translate3d(${P.x.x}px,${P.y.x + fy}px,0) rotateX(${P.rx.x}deg) rotateY(${P.ry.x}deg) rotateZ(${P.rz.x}deg) scale3d(${1 + .03 * squeeze.x},${1 - .06 * squeeze.x},1)`;
     if (!fall) {
-      const ps = pack.style;   // the light is from the upper left: turning away pushes the glint round the left edge and dims it
-      ps.setProperty('--gx', clamp(-P.ry.x * .12, -1.5, 3).toFixed(2)); ps.setProperty('--gl', clamp(.8 - P.ry.x * .012, .45, 1).toFixed(2));
-      ps.setProperty('--gm', clamp(50 + P.ry.x * 1.2, 20, 80).toFixed(1)); ps.setProperty('--gt', clamp(.85 + P.rx.x * .015, .5, 1).toFixed(2));
+      const ps = pack.style, reflection = currentVisualPack.visuals.reflection;
+      ps.setProperty('--gx', clamp(-P.ry.x * .12, -1.5, 3).toFixed(2)); ps.setProperty('--gl', clamp(clamp(.8 - P.ry.x * .012, .45, 1) * reflection.edge, 0, 1).toFixed(2));
+      ps.setProperty('--gm', clamp(50 + P.ry.x * 1.2, 20, 80).toFixed(1)); ps.setProperty('--gt', clamp(clamp(.85 + P.rx.x * .015, .5, 1) * reflection.seal, 0, 1).toFixed(2));
       pack.style.setProperty('--sh', clamp(P.ry.x * 1.2 + P.rx.x * .8, -22, 22).toFixed(1));
-      for (const el of pupils) el.style.transform = `translate(${eye.x.x}px,${eye.y.x}px)`;
+      if (currentVisualPack.visuals.wrapper === 'classic') for (const el of pupils) el.style.transform = `translate(${eye.x.x}px,${eye.y.x}px)`;
     }
     if (fy > innerHeight) pack.style.visibility = 'hidden';
   }
@@ -392,7 +409,7 @@ function frame(now) {
       if (c.kb && c !== hot) { c.hx = .5 + Math.sin(t * 1.7) * .22 * motion; c.hy = .5 + Math.cos(t * 1.3) * .16 * motion; }   // picked with the keyboard, it shows off its foil by itself
       const f = c.f, w = t * .8 + c.i * 1.9, on = c.hover;
       if (on !== c.glad) { c.glad = on; c.el.classList.toggle('glad', on); if (on) sfx?.lift(c.slot); }
-      if (motion && t > c.blinkAt) { c.blinkAt = t + rand(2.2, 5.5); blink(c.eyes, Math.random() < .25 ? 2 : 1); }   // now and then a double blink
+      if (motion && c.eyes.length && t > c.blinkAt) { c.blinkAt = t + rand(2.2, 5.5); blink(c.eyes, Math.random() < .25 ? 2 : 1); }
       p.x.to = f.x; p.s.to = f.s;
       p.y.to = f.y + (on ? -16 : Math.sin(w * 1.2) * 5 * motion);
       p.z.to = f.z + (on ? 110 : 0);
@@ -414,6 +431,15 @@ function frame(now) {
       }
     }
   }
+  const described = hot?.hover ? hot : cards.find(c => c.hover);
+  if (described?.d.description) {
+    if (cardDescription.dataset.cardId !== described.d.id) {
+      cardDescription.dataset.cardId = described.d.id;
+      descriptionTitle.textContent = described.d.name;
+      descriptionText.textContent = described.d.description;
+    }
+    cardDescription.hidden = false;
+  } else cardDescription.hidden = true;
   if (state === 'open' && spreadAt && t > spreadAt + (reduce ? .1 : ORBIT + .3)) {
     state = 'spread'; again.hidden = false;
     if (viaKey) again.focus();
@@ -456,10 +482,16 @@ addEventListener('keydown', e => {   // along the row with the arrow keys, from 
   const d = e.key === 'ArrowLeft' ? -1 : 1, at = cards.find(c => c.el === document.activeElement), slot = at ? clamp(at.slot + d, 0, cards.length - 1) : d > 0 ? 0 : cards.length - 1;
   cards.find(c => c.slot === slot).el.focus({ preventScroll: true }); e.preventDefault();
 });
-again.addEventListener('click', () => {
-  sfx?.tick();
+function resetPack() {
+  clearTimeout(settle);
+  if (drag && hit.hasPointerCapture(drag.id)) hit.releasePointerCapture(drag.id);
+  sfx?.rip(0);
   for (const c of cards) c.el.remove();
-  cards = []; again.hidden = true; enter();
+  bits = bits.filter(b => b.age !== undefined);
+  cards = []; again.hidden = true; cardDescription.hidden = true; enter();
+}
+again.addEventListener('click', () => {
+  sfx?.tick(); resetPack();
   if (viaKey) hit.focus();
 });
 
@@ -481,19 +513,19 @@ for (const s of [-1, 1]) for (const deg of [80, 60, 40, 20, 0, -20, -40, -60, -8
    light drift out inside. in the svg's units the tear line sits at y 60; the ribbons start just under it, where the wrapper hides them,
    and each pours once the tear reaches it, straight out past the top of the screen. once the pack is fully torn the tail lets go of the
    opening and follows it, so the whole thing carries on up and off the top in under a second. redrawn for every pack */
-const BANDS = ['#ff3d6e', '#ff8a3d', '#ffd34d', '#4fd9a0', '#4fb2ff', '#8b6cff', '#ff5cc8'], NR = 35, CY = 107.5, STEP = handheld ? 3.5 : 2.5, SPAN = 1500, TIP = 36;
+const NR = 35, CY = 107.5, STEP = handheld ? 3.5 : 2.5, SPAN = 1500, TIP = 36;
 const tint = (hex, k) => '#' + [1, 3, 5].map(i => Math.round(parseInt(hex.slice(i, i + 2), 16) * (1 - k) + 255 * k).toString(16).padStart(2, '0')).join('');
 const ribbon = (a, b) => `M${a.join('L')}L${b.slice().reverse().join('L')}Z`;
 let lines = [], ribbons = [], motes = [], bandEls = [], edgeEls = [], stops = [], reach = 0, drained = false, Y0 = 62.5, R0 = 45;
 function sprout() {
-  const k0 = rand(0, 7) | 0, u = PW / 100;   // which colour the fan starts with
+  const colors = currentVisualPack.visuals.rainbow.colors, k0 = rand(0, colors.length) | 0, u = PW / 100;
   Y0 = 62.5 + (Y_MAX - TEAR) / 100 * PH / u; R0 = CY - Y0;   // the ribbons start below the deepest any tear can go, on the same lines as if they started at the mouth
   lines = Array.from({ length: NR + 1 }, (_, j) => {   // the edges between ribbons, aimed out from (50, Y0 + R0)
     const ox = 3 + 94 * j / NR, x = 50 + (ox - 50) * R0 / 45, a = Math.atan2(x - 50, R0) + rand(-.012, .012);
     return { ox, x, ux: Math.sin(a), uy: -Math.cos(a), ph: j * .35 + rand(-.1, .1), r: Math.hypot(x - 50, R0) };
   });
   // each ribbon runs out to where the fade has taken it, so the middle ones reach furthest
-  ribbons = Array.from({ length: NR }, (_, j) => { const r = (lines[j].r + lines[j + 1].r) / 2; return { mx: (lines[j].ox + lines[j + 1].ox) / 2, gx: (lines[j].x + lines[j + 1].x) / 2, r, L: 0, c: BANDS[(j + k0) % 7], on: false, len: 0, g: new Spring(0, .4, reduce ? 0 : .3) }; });
+  ribbons = Array.from({ length: NR }, (_, j) => { const r = (lines[j].r + lines[j + 1].r) / 2; return { mx: (lines[j].ox + lines[j + 1].ox) / 2, gx: (lines[j].x + lines[j + 1].x) / 2, r, L: 0, c: colors[(j + k0) % colors.length], on: false, len: 0, g: new Spring(0, .4, reduce ? 0 : .3) }; });
   rays.innerHTML = `<defs><radialGradient id="mote"><stop offset=".2" stop-color="#fff"/><stop offset=".45" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
     ${ribbons.map((b, j) => { const ux = (lines[j].ux + lines[j + 1].ux) / 2, uy = (lines[j].uy + lines[j + 1].uy) / 2;
       const hot = 26 + Y0 - 62.5; return `<linearGradient id="b${j}" gradientUnits="userSpaceOnUse" x1="${b.gx.toFixed(2)}" y1="${Y0}" x2="${(b.gx + ux * hot).toFixed(2)}" y2="${(Y0 + uy * hot).toFixed(2)}"><stop stop-color="${tint(b.c, .7)}"/><stop offset="1" stop-color="${b.c}"/></linearGradient>`; }).join('')}
@@ -636,7 +668,7 @@ function voices(ctx) {
     },
     land(name, slot, at = now()) {   // paper on a table. only the best card says anything, so the row lands quietly with one small payoff
       air({ at, from: 2600, to: 1300, Q: .6, gain: .07, attack: .002, dur: .05 });
-      if (name === 'nova') coo(659, [[0, .94], [.035, 1]], { at: at + .06, gain: .04, attack: .006, send: .06, pan: (slot - 2) * .18, wave: 'sine' });
+      if (name === 'the star' || name === 'nova') coo(659, [[0, .94], [.035, 1]], { at: at + .06, gain: .04, attack: .006, send: .06, pan: (slot - 2) * .18, wave: 'sine' });
     },
     lift(slot, at = now()) {   // a card rising towards you on hover: one dark, soft breath with nothing bright in it, peaking as the card moves fastest
       const side = (slot - 2) * .18;

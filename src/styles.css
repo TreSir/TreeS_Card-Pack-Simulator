@@ -183,3 +183,40 @@ i{font-style:normal}
   .card .face,.card .pop{transition:opacity .25s ease}
   @starting-style{.card .face,.card .pop{opacity:0}}
 }
+
+/* Arcana collection: a celestial seal on the wrapper and full-bleed illustrated cards. */
+.classic-mascot,.tarot-seal{position:absolute;inset:0}
+.tarot-seal,.theme-tarot .classic-mascot{display:none}
+.theme-tarot .tarot-seal{display:block}
+.theme-tarot .mark{left:8%;top:15%;font:600 calc(var(--pw)*.13)/1 Georgia,serif;letter-spacing:.055em;color:#f7e8c6}
+.theme-tarot .mark.sm{left:0;right:0;top:20%;font-size:calc(var(--pw)*.1);letter-spacing:.08em}
+.theme-tarot .series{right:9%;top:25%;font:600 calc(var(--pw)*.029)/1 Georgia,serif;letter-spacing:.14em;color:rgb(255 239 207/.72)}
+.theme-tarot .tag,.theme-tarot .foot{color:rgb(255 239 207/.8)}
+.theme-tarot .foot{font-size:calc(var(--pw)*.036);letter-spacing:.035em}
+.theme-tarot .orb{left:14%;width:72%;top:31%;border:1px solid rgb(245 225 185/.6);border-radius:50%;
+  background:radial-gradient(circle,rgb(255 235 194/.12),transparent 68%);box-shadow:0 0 0 5px rgb(249 231 194/.04),inset 0 0 25px rgb(247 223 179/.06)}
+.theme-tarot .orb::before,.theme-tarot .orb::after,.seal-ring{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.theme-tarot .orb::before{inset:4.5%;border:1px solid rgb(245 225 185/.24)}
+.theme-tarot .orb::after{inset:19%;border:1px solid rgb(245 225 185/.26)}
+.seal-ring{inset:11%;border:1px dashed rgb(245 225 185/.42)}
+.seal-ring.inner{inset:26%;border:1px solid rgb(245 225 185/.2)}
+.seal-moon,.seal-star{position:absolute;color:#f3dfb2;text-shadow:0 1px 9px rgb(250 231 185/.25);font-family:Georgia,serif;line-height:1}
+.seal-moon{left:50%;top:50%;font-size:calc(var(--pw)*.29);transform:translate(-50%,-53%) rotate(-18deg)}
+.seal-star.one{left:61%;top:30%;font-size:calc(var(--pw)*.075)}
+.seal-star.two{left:22%;top:37%;font-size:calc(var(--pw)*.06)}
+.seal-star.three{right:24%;bottom:24%;font-size:calc(var(--pw)*.05)}
+.tarot{--edge:#b29a70}
+.tarot .face,.tarot .slab{border-radius:calc(var(--cw)*.025)}
+.tarot .face{background:#ede0c6}
+.tarot-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.tarot .holo{mix-blend-mode:soft-light;opacity:calc(.12 + var(--hyp)*.2);filter:saturate(.7)}
+.tarot .holo::after{opacity:.45}
+.tarot .glare{opacity:calc(.08 + var(--hyp)*.24)}
+.tarot .glaze{opacity:.6}
+.card-description{position:fixed;z-index:5;left:50%;bottom:calc(max(24px,5vh) + 62px);translate:-50% 0;
+  width:max-content;max-width:min(420px,calc(100vw - 36px));padding:10px 14px;border-radius:10px;
+  background:rgb(255 255 255/.94);box-shadow:0 4px 20px rgb(20 16 40/.14);color:var(--ink);font:14px/1.5 system-ui,sans-serif;
+  text-align:center;pointer-events:none}
+.card-description strong{display:block;font-size:13px}
+.card-description span{display:block}
+.card-description[hidden]{display:none}

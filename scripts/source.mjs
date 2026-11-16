@@ -21,6 +21,12 @@ export function parseArt(js) {
   return JSON.parse(literal);
 }
 
+export function parseCatalog(js) {
+  const literal = js.match(/const CATALOG = ([\s\S]*?);\s*$/)?.[1];
+  if (!literal) throw new Error('src/catalog.js must end with a JSON-compatible const CATALOG declaration.');
+  return JSON.parse(literal);
+}
+
 export function mapStrings(value, transform, trail = []) {
   if (typeof value === 'string') return transform(value, trail);
   if (Array.isArray(value)) return value.map((entry, i) => mapStrings(entry, transform, [...trail, i]));
