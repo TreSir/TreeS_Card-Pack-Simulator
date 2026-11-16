@@ -1,0 +1,110 @@
+[
+  {
+    "card": "fool",
+    "part": "subject",
+    "path": "assets/tarot/the-fool-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-e57fbaa5-ba72-45d3-9836-081883bd0773.png"
+  },
+  {
+    "card": "fool",
+    "part": "background",
+    "path": "assets/tarot/the-fool-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-9b86cb84-2c83-4550-8ec9-808a9afa4095.png"
+  },
+  {
+    "card": "high-priestess",
+    "part": "subject",
+    "path": "assets/tarot/the-high-priestess-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-c491d142-08c2-4c1f-afa3-c5614ca8bb29.png"
+  },
+  {
+    "card": "high-priestess",
+    "part": "background",
+    "path": "assets/tarot/the-high-priestess-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-c2e7f488-bbe9-450d-a387-3fa12298b7ef.png"
+  },
+  {
+    "card": "empress",
+    "part": "subject",
+    "path": "assets/tarot/the-empress-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-c7561dad-408b-41b5-b06c-1b2c7c04a8c2.png"
+  },
+  {
+    "card": "empress",
+    "part": "background",
+    "path": "assets/tarot/the-empress-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-85128b43-1ca2-4ecd-86a8-fa3215e8cad1.png"
+  },
+  {
+    "card": "lovers",
+    "part": "subject",
+    "path": "assets/tarot/the-lovers-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-f8765708-e376-46e2-b009-def9a8ebd405.png"
+  },
+  {
+    "card": "lovers",
+    "part": "background",
+    "path": "assets/tarot/the-lovers-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-438f92c5-6aed-48d4-92e2-124dd5104f2c.png"
+  },
+  {
+    "card": "wheel-of-fortune",
+    "part": "subject",
+    "path": "assets/tarot/the-wheel-of-fortune-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-90c09eba-ee4c-453a-90d6-fa8ecd3dc944.png"
+  },
+  {
+    "card": "wheel-of-fortune",
+    "part": "background",
+    "path": "assets/tarot/the-wheel-of-fortune-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-36b2c619-ad85-4feb-8736-9d9e47e2a394.png"
+  },
+  {
+    "card": "tower",
+    "part": "subject",
+    "path": "assets/tarot/the-tower-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-95d14d23-07ee-4dfa-a29b-f23213e2d20e.png"
+  },
+  {
+    "card": "tower",
+    "part": "background",
+    "path": "assets/tarot/the-tower-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-4d6f2672-1385-48aa-89c5-b40d4cca20cc.png"
+  },
+  {
+    "card": "star",
+    "part": "subject",
+    "path": "assets/tarot/the-star-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-9328705b-a702-4f17-8f1c-5c186423a109.png"
+  },
+  {
+    "card": "star",
+    "part": "background",
+    "path": "assets/tarot/the-star-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-23da589a-c5d8-435b-9856-91f6ff5bf043.png"
+  },
+  {
+    "card": "moon",
+    "part": "subject",
+    "path": "assets/tarot/the-moon-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-9eb86b46-9cc0-479f-97d5-c70b86f9e50f.png"
+  },
+  {
+    "card": "moon",
+    "part": "background",
+    "path": "assets/tarot/the-moon-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-52ec5798-e991-4bc7-a289-47f9672baf9e.png"
+  },
+  {
+    "card": "sun",
+    "part": "subject",
+    "path": "assets/tarot/the-sun-subject-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-e42ab43f-0001-4922-8cc4-3b5e0946cfc1.png"
+  },
+  {
+    "card": "sun",
+    "part": "background",
+    "path": "assets/tarot/the-sun-background-v2.png",
+    "generatedFile": "C:\\Users\\32935\\.codex\\generated_images\\01a1e45f-6514-7611-8448-3f1979197fb0\\exec-40bc24d6-0152-460d-8e6f-21b39535acea.png"
+  }
+]

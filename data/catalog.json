@@ -1,0 +1,513 @@
+{
+  "types": [
+    {
+      "id": "swords",
+      "name": "传世名剑",
+      "visualPack": "swords"
+    },
+    {
+      "id": "tarot",
+      "name": "Tarot",
+      "visualPack": "tarot"
+    },
+    {
+      "id": "classic",
+      "name": "Classic characters",
+      "visualPack": "classic"
+    }
+  ],
+  "packs": [
+    {
+      "id": "swords",
+      "name": "名剑包",
+      "brand": "名剑录",
+      "family": "传世名剑",
+      "types": ["swords"],
+      "size": 5,
+      "visuals": {
+        "wrapper": "tarot",
+        "colorways": [["青玉", "#183f3c"], ["赤金", "#672f32"], ["玄金", "#282b36"]],
+        "rainbow": { "enabled": true, "colors": ["#e7c477", "#7cc6ab", "#d79c63", "#b66457", "#ead79b", "#5f9f99", "#e0b766"] },
+        "confetti": { "enabled": true, "colors": ["#e7c477", "#9dd7c1", "#ca735c", "#e8d6a0", "#ffffff"], "desktopCount": 200, "mobileCount": 110 },
+        "reflection": { "edge": 1.1, "seal": 1 }
+      }
+    },
+    {
+      "id": "tarot",
+      "name": "Tarot pack",
+      "brand": "ARCANA",
+      "family": "Major Arcana",
+      "types": [
+        "tarot"
+      ],
+      "size": 5,
+      "visuals": {
+        "wrapper": "tarot",
+        "colorways": [
+          [
+            "Midnight",
+            "#26344d"
+          ],
+          [
+            "Garnet",
+            "#643d43"
+          ],
+          [
+            "Forest",
+            "#3a5147"
+          ],
+          [
+            "Amethyst",
+            "#51435d"
+          ],
+          [
+            "Ochre",
+            "#8a6744"
+          ],
+          [
+            "Slate",
+            "#40525b"
+          ]
+        ],
+        "rainbow": {
+          "enabled": true,
+          "colors": [
+            "#d5a35b",
+            "#b96e61",
+            "#e4c783",
+            "#8aa495",
+            "#829cb4",
+            "#a998ae",
+            "#d2ad83"
+          ]
+        },
+        "confetti": {
+          "enabled": true,
+          "colors": [
+            "#d5a35b",
+            "#b96e61",
+            "#e4c783",
+            "#8aa495",
+            "#829cb4",
+            "#a998ae",
+            "#d2ad83",
+            "#ffffff"
+          ],
+          "desktopCount": 240,
+          "mobileCount": 130
+        },
+        "reflection": {
+          "edge": 1,
+          "seal": 1
+        }
+      }
+    },
+    {
+      "id": "classic",
+      "name": "Classic pack",
+      "brand": "holo",
+      "family": "Card pack",
+      "types": [
+        "classic"
+      ],
+      "size": 5,
+      "visuals": {
+        "wrapper": "classic",
+        "colorways": [
+          [
+            "Cobalt",
+            "#2b3ff0"
+          ],
+          [
+            "Ember",
+            "#f0542c"
+          ],
+          [
+            "Grape",
+            "#7a42f0"
+          ],
+          [
+            "Pine",
+            "#0e9c79"
+          ],
+          [
+            "Night",
+            "#23273d"
+          ],
+          [
+            "Bubblegum",
+            "#ec4f9a"
+          ]
+        ],
+        "rainbow": {
+          "enabled": true,
+          "colors": [
+            "#ff3d6e",
+            "#ff8a3d",
+            "#ffd34d",
+            "#4fd9a0",
+            "#4fb2ff",
+            "#8b6cff",
+            "#ff5cc8"
+          ]
+        },
+        "confetti": {
+          "enabled": true,
+          "colors": [
+            "#ff3d6e",
+            "#ff8a3d",
+            "#ffd34d",
+            "#4fd9a0",
+            "#4fb2ff",
+            "#8b6cff",
+            "#ff5cc8",
+            "#ffffff"
+          ],
+          "desktopCount": 240,
+          "mobileCount": 130
+        },
+        "reflection": {
+          "edge": 1,
+          "seal": 1
+        }
+      }
+    },
+    {
+      "id": "mixed",
+      "name": "Mixed pack",
+      "brand": "MIXED",
+      "family": "Tarot + Classic + Swords",
+      "types": [
+        "tarot",
+        "classic",
+        "swords"
+      ],
+      "size": 5
+    }
+  ],
+  "cards": [
+    {
+      "id": "xuan-yuan",
+      "type": "swords",
+      "name": "轩辕",
+      "number": "03",
+      "layers": {
+        "background": "assets/swords/xuan-yuan/background.png",
+        "subject": "assets/swords/xuan-yuan/subject.png"
+      },
+      "layerLayout": {
+        "scale": 0.82,
+        "x": 9,
+        "y": 3
+      },
+      "description": "金锋映日，群山拱卫。以厚重剑脊、星辰纹饰和赭金山河，呈现开阔庄严的王者气象。"
+    },
+    {
+      "id": "zhan-lu",
+      "type": "swords",
+      "name": "湛卢",
+      "number": "04",
+      "layers": {
+        "background": "assets/swords/zhan-lu/background.png",
+        "subject": "assets/swords/zhan-lu/subject.png"
+      },
+      "layerLayout": { "scale": 0.94, "x": 3, "y": 0 },
+      "description": "玄锋无声，寒潭照影。墨色剑身与冷银刃线收敛锋芒，在松岭和薄雾之间呈现沉稳气度。"
+    },
+    {
+      "id": "tai-e",
+      "type": "swords",
+      "name": "太阿",
+      "number": "05",
+      "layers": {
+        "background": "assets/swords/tai-e/background.png",
+        "subject": "assets/swords/tai-e/subject.png"
+      },
+      "layerLayout": {
+        "scale": 0.84,
+        "x": 8,
+        "y": 2
+      },
+      "description": "重锋凌霆，雄关临海。宽厚剑脊、紫金装具与远方雷光呼应，呈现沉雄而有压迫感的剑势。"
+    },
+    {
+      "id": "long-yuan",
+      "type": "swords",
+      "name": "龙渊",
+      "number": "06",
+      "layers": {
+        "background": "assets/swords/long-yuan/background.png",
+        "subject": "assets/swords/long-yuan/subject.png"
+      },
+      "layerLayout": {
+        "scale": 0.91,
+        "x": 4.5,
+        "y": 0
+      },
+      "description": "星纹入刃，清辉落渊。银蓝剑身与深潭瀑布相映，以细长剑势和流水纹饰呈现澄澈灵动。"
+    },
+    {
+      "id": "gan-jiang",
+      "type": "swords",
+      "name": "干将",
+      "number": "07",
+      "layers": {
+        "background": "assets/swords/gan-jiang/background.png",
+        "subject": "assets/swords/gan-jiang/subject.png"
+      },
+      "layerLayout": {
+        "scale": 0.87,
+        "x": 6.5,
+        "y": 3
+      },
+      "description": "炉火凝锋，玄铁藏光。锤炼纹理与铜色剑脊映照山中炉火，以刚健剑形呈现铸造的力量。"
+    },
+    {
+      "id": "mo-ye",
+      "type": "swords",
+      "name": "莫邪",
+      "number": "08",
+      "layers": {
+        "background": "assets/swords/mo-ye/background.png",
+        "subject": "assets/swords/mo-ye/subject.png"
+      },
+      "layerLayout": {
+        "scale": 0.9,
+        "x": 5,
+        "y": 2
+      },
+      "description": "月色淬刃，柔光含锋。银白水纹与月石装具呼应干将的炉火，在清雾与幽兰之间呈现秀逸剑意。"
+    },
+    {
+      "id": "yu-chang",
+      "type": "swords",
+      "name": "鱼肠",
+      "number": "09",
+      "layers": {
+        "background": "assets/swords/yu-chang/background.png",
+        "subject": "assets/swords/yu-chang/subject.png"
+      },
+      "description": "短锋藏巧，水纹流转。以紧凑叶形剑身、暗红握柄与莲池铜影，呈现含蓄而锐利的辨识度。"
+    },
+    {
+      "id": "cheng-ying",
+      "type": "swords",
+      "name": "承影",
+      "number": "10",
+      "layers": {
+        "background": "assets/swords/cheng-ying/background.png",
+        "subject": "assets/swords/cheng-ying/subject.png"
+      },
+      "layerLayout": {
+        "scale": 0.91,
+        "x": 4.5,
+        "y": 0
+      },
+      "description": "薄刃映月，竹影随锋。冰银剑身与静水倒影若隐若现，以清冷留白和轻盈装具呈现空灵之美。"
+    },
+    {
+      "id": "chun-jun",
+      "type": "swords",
+      "name": "纯钧",
+      "number": "01",
+      "image": "assets/swords/chun-jun/card.png",
+      "layers": { "background": "assets/swords/chun-jun/background.png", "subject": "assets/swords/chun-jun/subject.png" },
+      "description": "青玉映锋，山门藏光。以玉璧与群峰衬托端正剑势，呈现沉静而尊贵的名剑意象。"
+    },
+    {
+      "id": "chi-xiao",
+      "type": "swords",
+      "name": "赤霄",
+      "number": "02",
+      "image": "assets/swords/chi-xiao/card.png",
+      "layers": { "background": "assets/swords/chi-xiao/background.png", "subject": "assets/swords/chi-xiao/subject.png" },
+      "description": "赤日破云，剑指九霄。银刃斜贯龙形金云，红绸与云海呼应，呈现昂扬而炽烈的名剑意象。"
+    },
+    {
+      "id": "fool",
+      "type": "tarot",
+      "name": "The Fool",
+      "number": "0",
+      "image": "assets/tarot/the-fool.jpg",
+      "layers": {
+        "background": "assets/tarot/the-fool-background-v2.png",
+        "subject": "assets/tarot/the-fool-subject-v2.png"
+      },
+      "layerLayout": { "scale": 0.84, "x": 4, "y": 10 },
+      "description": "带着好奇与勇气踏上旅途，象征新的开始与无限可能。"
+    },
+    {
+      "id": "magician",
+      "type": "tarot",
+      "name": "The Magician",
+      "number": "I",
+      "image": "assets/tarot/the-magician.jpg",
+      "layers": {
+        "background": "assets/tarot/the-magician-background-v2.png",
+        "subject": "assets/tarot/the-magician-subject-v2.png"
+      },
+      "description": "汇集手边的资源，将灵感化为行动与创造。"
+    },
+    {
+      "id": "high-priestess",
+      "type": "tarot",
+      "name": "The High Priestess",
+      "number": "II",
+      "image": "assets/tarot/the-high-priestess.jpg",
+      "layers": {
+        "background": "assets/tarot/the-high-priestess-background-v2.png",
+        "subject": "assets/tarot/the-high-priestess-subject-v2.png"
+      },
+      "description": "静观内心与未知，在宁静中倾听直觉。"
+    },
+    {
+      "id": "empress",
+      "type": "tarot",
+      "name": "The Empress",
+      "number": "III",
+      "image": "assets/tarot/the-empress.jpg",
+      "layers": {
+        "background": "assets/tarot/the-empress-background-v2.png",
+        "subject": "assets/tarot/the-empress-subject-v2.png"
+      },
+      "layerLayout": { "scale": 0.86, "x": 6, "y": 10 },
+      "description": "丰盛与生长的象征，温柔地滋养创造力。"
+    },
+    {
+      "id": "lovers",
+      "type": "tarot",
+      "name": "The Lovers",
+      "number": "VI",
+      "image": "assets/tarot/the-lovers.jpg",
+      "layers": {
+        "background": "assets/tarot/the-lovers-background-v2.png",
+        "subject": "assets/tarot/the-lovers-subject-v2.png"
+      },
+      "layerLayout": { "scale": 0.68, "x": 16, "y": 25 },
+      "description": "关于连接、信任，以及遵从内心的选择。"
+    },
+    {
+      "id": "wheel-of-fortune",
+      "type": "tarot",
+      "name": "The Wheel of Fortune",
+      "number": "X",
+      "image": "assets/tarot/the-wheel-of-fortune.jpg",
+      "layers": {
+        "background": "assets/tarot/the-wheel-of-fortune-background-v2.png",
+        "subject": "assets/tarot/the-wheel-of-fortune-subject-v2.png"
+      },
+      "description": "命运不断流转，提醒我们迎接变化与机遇。"
+    },
+    {
+      "id": "tower",
+      "type": "tarot",
+      "name": "The Tower",
+      "number": "XVI",
+      "image": "assets/tarot/the-tower.jpg",
+      "layers": {
+        "background": "assets/tarot/the-tower-background-v2.png",
+        "subject": "assets/tarot/the-tower-subject-v2.png"
+      },
+      "layerLayout": { "scale": 0.87, "x": 4, "y": 11 },
+      "description": "闪电打破旧有结构，为真实与新生腾出空间。"
+    },
+    {
+      "id": "star",
+      "type": "tarot",
+      "name": "The Star",
+      "number": "XVII",
+      "image": "assets/tarot/the-star-preview.jpg",
+      "layers": {
+        "background": "assets/tarot/the-star-background-v2.png",
+        "subject": "assets/tarot/the-star-subject-v2.png"
+      },
+      "layerLayout": { "scale": 0.78, "x": 4, "y": 14 },
+      "description": "夜空中的希望之光，象征平静、信念与疗愈。"
+    },
+    {
+      "id": "moon",
+      "type": "tarot",
+      "name": "The Moon",
+      "number": "XVIII",
+      "image": "assets/tarot/the-moon.jpg",
+      "layers": {
+        "background": "assets/tarot/the-moon-background-v2.png",
+        "subject": "assets/tarot/the-moon-subject-v2.png"
+      },
+      "description": "穿过朦胧与不确定，探索梦境和潜意识。"
+    },
+    {
+      "id": "sun",
+      "type": "tarot",
+      "name": "The Sun",
+      "number": "XIX",
+      "image": "assets/tarot/the-sun.jpg",
+      "layers": {
+        "background": "assets/tarot/the-sun-background-v2.png",
+        "subject": "assets/tarot/the-sun-subject-v2.png"
+      },
+      "layerLayout": { "scale": 0.87, "x": 5, "y": 8 },
+      "description": "温暖的阳光带来喜悦、生命力与明朗。"
+    },
+    {
+      "id": "blip",
+      "type": "classic",
+      "name": "Blip",
+      "affinity": "Spark",
+      "number": "014",
+      "tier": "common",
+      "label": "Common",
+      "mark": "●",
+      "art": "blip",
+      "description": "一颗充满活力的小火花，带着轻快的笑容。"
+    },
+    {
+      "id": "cubit",
+      "type": "classic",
+      "name": "Cubit",
+      "affinity": "Block",
+      "number": "027",
+      "tier": "common",
+      "label": "Common",
+      "mark": "●",
+      "art": "cubit",
+      "description": "这是一个方块....."
+    },
+    {
+      "id": "facet",
+      "type": "classic",
+      "name": "Facet",
+      "affinity": "Prism",
+      "number": "063",
+      "tier": "rare",
+      "label": "Rare",
+      "mark": "◆",
+      "art": "facet",
+      "description": "闪耀的棱面折射出色彩与想象。"
+    },
+    {
+      "id": "ringo",
+      "type": "classic",
+      "name": "Ringo",
+      "affinity": "Orbit",
+      "number": "088",
+      "tier": "rare",
+      "label": "Holo rare",
+      "mark": "◆◆",
+      "art": "ringo",
+      "description": "带着环绕轨道的小小旅者，来自星空深处。"
+    },
+    {
+      "id": "nova",
+      "type": "classic",
+      "name": "Nova",
+      "affinity": "Star",
+      "number": "120",
+      "tier": "ultra",
+      "label": "Ultra rare",
+      "mark": "★",
+      "art": "nova",
+      "description": "明亮的星形伙伴，为每次相遇带来光芒。"
+    }
+  ]
+}

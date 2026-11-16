@@ -1,0 +1,7 @@
+Use case: stylized-concept. Create one finished tarot card front as an image asset for an interactive card-unpacking website.
+
+Design: The Star, major arcana XVII. A serene, graceful figure by a still pool beneath one luminous eight-pointed star, with a few subtle celestial details. Classical, elegant, poetic and expressive: painterly watercolor and gouache washes on aged ivory paper, loose atmospheric brushwork balanced with fine antique engraved ornament. Restrained palette of midnight blue, muted teal, warm ivory and soft antique gold. Refined vintage tarot aesthetic, not cute or cartoonish. The central figure and star should read clearly even when the card is displayed small.
+
+Composition: exactly one flat, front-facing vertical card face, portrait 5:7 proportions, filling the entire image edge to edge. Delicate thin ornamental border contained inside the frame, ample breathing room around the main illustration, balanced geometry. Place the clearly legible Roman numeral 'XVII' at top and the words 'THE STAR' at bottom in small, elegant classical serif lettering. No other text.
+
+Production constraints: clean, undistorted, rectangular card artwork intended as a texture for a website that independently animates card tilt, depth and iridescent highlights. No baked-in perspective, angled view, cast shadow, mockup, hand, background surface, external margin, fake lens flare, holographic sheen or strong glare. No extra cards, logos, or watermarks.

@@ -1,5 +1,4 @@
-/* Original character art and rig coordinates recovered from https://holo.yashb.xyz/. */
-const ART = {
+{
   "blip": {
     "body": "assets/characters/blip-body.webp",
     "eyes": [
@@ -180,4 +179,4 @@ const ART = {
       "assets/characters/sparkle-sweat.webp"
     ]
   }
-};
+}

@@ -8,7 +8,7 @@ const args = process.argv.slice(2);
 const at = args.indexOf('--port');
 const requested = Number(at < 0 ? process.env.PORT || 4173 : args[at + 1]);
 if (!Number.isInteger(requested) || requested < 1024 || requested > 65535) throw new Error('Port must be an integer between 1024 and 65535.');
-const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml' };
+const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
 const base = await realpath(root);
 
 const server = createServer(async (req, res) => {
@@ -17,7 +17,7 @@ const server = createServer(async (req, res) => {
     let pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname).replaceAll('\\', '/');
     if (pathname.endsWith('/')) pathname += 'index.html';
     const name = pathname.slice(1);
-    if (!(name === 'index.html' || name === 'reference/original.html' || /^(src|assets|dist)\//.test(name))) { res.writeHead(404).end('Not found'); return; }
+    if (!(name === 'index.html' || name === 'reference/original.html' || /^(src|data|assets|dist)\//.test(name))) { res.writeHead(404).end('Not found'); return; }
     const file = resolve(join(base, name));
     const within = path => { const rel = relative(base, path); return rel !== '..' && !rel.startsWith(`..${sep}`) && !rel.includes(':'); };
     if (!within(file) || !within(await realpath(file))) { res.writeHead(403).end('Forbidden'); return; }
